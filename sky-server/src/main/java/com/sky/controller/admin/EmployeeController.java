@@ -37,8 +37,8 @@ public class EmployeeController {
     /**
      * 登录
      *
-     * @param employeeLoginDTO
-     * @return
+     * @param employeeLoginDTO employeeLoginDTO
+     * @return Result<EmployeeLoginVO>
      */
     @ApiOperation("员工登录")
     @PostMapping("/login")
@@ -67,16 +67,15 @@ public class EmployeeController {
 
     /**
      * 退出
-     *
-     * @return
+     * @return Result<String>
      */
     @ApiOperation("员工退出")
     @PostMapping("/logout")
     public Result<String> logout() {return Result.success();}
     /**
      * 新增员工
-     * @param employeeDTO
-     * @return
+     * @param employeeDTO employeeDTO
+     * @return Result<EmployeeDTO>
      */
     @ApiOperation("新增员工")
     @PostMapping()
@@ -99,8 +98,8 @@ public class EmployeeController {
 
     /**
      * 根据id查询员工信息
-     * @param id
-     * @return
+     * @param id id
+     * @return Employee
      */
     @ApiOperation("根据id查询员工信息")
     @GetMapping("/{id}")
