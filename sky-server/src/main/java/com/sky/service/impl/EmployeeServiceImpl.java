@@ -36,8 +36,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     /**
      * 员工登录
      *
-     * @param employeeLoginDTO
-     * @return
+     * @param employeeLoginDTO employeeLoginDTO
+     * @return Employee
      */
     public Employee login(EmployeeLoginDTO employeeLoginDTO) {
         String username = employeeLoginDTO.getUsername();
@@ -71,7 +71,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     /**
      * 新增员工
-     * @param employeeDTO
+     * @param employeeDTO employeeDTO
      */
     @Override
     public void save(EmployeeDTO employeeDTO) {
@@ -95,8 +95,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
     /**
      * 分页查询
-     * @param employeePageQueryDTO
-     * @return
+     * @param employeePageQueryDTO employeePageQueryDTO
+     * @return PageResult
      */
     @Override
     public PageResult pageQuery(EmployeePageQueryDTO employeePageQueryDTO) {
@@ -109,8 +109,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
     /**
      * 启用禁用员工账号
-     * @param status
-     * @param id
+     * @param status status
+     * @param id id
      */
     @Override
     public void startOrStop(Integer status, Long id) {
@@ -120,5 +120,28 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .build();
         employeeMapper.update(employee);
 
+    }
+    /**
+     * 根据id查询员工信息
+     * @param id id
+     * @return Employee
+     */
+    @Override
+    public Employee getById(Long id) {
+        Employee employee=employeeMapper.getById(id);
+        employee.setPassword("****");
+        return employee;
+    }
+    /**
+     * 编辑员工信息
+     * @param employeeDTO employeeDTO
+     */
+    @Override
+    public void update(EmployeeDTO employeeDTO) {
+        Employee employee = new Employee();
+        BeanUtils.copyProperties(employeeDTO,employee);
+        employee.setUpdateTime(LocalDateTime.now());
+        employee.setUpdateUser(BaseContext.getCurrentId());
+        employeeMapper.update(employee);
     }
 }
