@@ -12,7 +12,7 @@
             </if>
         </where>
     </select>
-<!--    修改-->
+<!--    根据主键动态修改属性-->
     <update id="update" parameterType="Employee">
         update employee
         <set>
